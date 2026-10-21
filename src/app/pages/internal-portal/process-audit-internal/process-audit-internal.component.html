@@ -1,0 +1,70 @@
+<div class="sqm-wrapper">
+  <!-- SIDE NAV CONTAINER -->
+  <aside class="nav-container" [ngClass]="isSidenavOpen ? 'nav-open' : 'nav-closed'">
+    <div class="toggle-bar">
+      <button (click)="toggleSidenav()" class="toggle-button" type="button" aria-label="Toggle Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <nav class="nav-links">
+      <ul>
+        <!-- Analytics -->
+        <li routerLinkActive="active">
+          <a routerLink="./analytics">
+            <mat-icon class="nav-icon" matTooltip="Analytics" [matTooltipDisabled]="isSidenavOpen">bar_chart</mat-icon>
+            <span class="nav-text">Analytics</span>
+          </a>
+        </li>
+
+        <!-- New Audit -->
+        <li (click)="openaudit('process')">
+          <a>
+            <mat-icon class="nav-icon" matTooltip="New Audit" [matTooltipDisabled]="isSidenavOpen">add_circle_outline</mat-icon>
+            <span class="nav-text">New Audit</span>
+          </a>
+        </li>
+
+        <!-- Active Audits -->
+        <li routerLinkActive="active">
+          <a routerLink="./active-audits">
+            <mat-icon class="nav-icon" matTooltip="Active Audits" [matTooltipDisabled]="isSidenavOpen">pending_actions</mat-icon>
+            <span class="nav-text">Active Audits</span>
+          </a>
+        </li>
+
+        <!-- Process CAPA -->
+        <li routerLinkActive="active">
+          <a routerLink="./process-capa">
+            <mat-icon class="nav-icon" matTooltip="CAPA" [matTooltipDisabled]="isSidenavOpen">play_circle_outline</mat-icon>
+            <span class="nav-text">CAPA</span>
+          </a>
+        </li>
+
+        <!-- Completed Audits -->
+        <li routerLinkActive="active">
+          <a routerLink="./completed-audits">
+            <mat-icon class="nav-icon" matTooltip="Completed Audits" [matTooltipDisabled]="isSidenavOpen">task_alt</mat-icon>
+            <span class="nav-text">Completed Audits</span>
+          </a>
+        </li>
+
+        <!-- IT Help Desk -->
+        <li (click)="openHelpDesk()">
+          <a>
+            <mat-icon class="nav-icon" matTooltip="IT Help Desk" [matTooltipDisabled]="isSidenavOpen">support_agent</mat-icon>
+            <span class="nav-text">IT Help Desk</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="main-content" [ngClass]="isSidenavOpen ? 'content-shrink' : 'content-expanded'">
+    <app-breadcrumb></app-breadcrumb>
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,91 @@
+/* Link styles matching Image 1 */
+.audit-link,
+.capa-link {
+  color: #1a73e8;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #1557b0;
+    text-decoration: underline;
+  }
+}
+
+.report-link {
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Status dropdown selector */
+.status-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 140px;
+
+  .status-select {
+    width: 100%;
+    height: 32px;
+    padding: 0 26px 0 10px;
+    font-size: 13px;
+    color: #6b7280;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: #ffffff;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+
+    &:focus {
+      border-color: #0284c7;
+    }
+  }
+
+  .select-chevron {
+    position: absolute;
+    right: 6px;
+    color: #6b7280;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+  }
+}
+
+/* Done checkbox button */
+.done-check-btn {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #9ca3af;
+  border-radius: 3px;
+  background-color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 auto;
+  transition: all 0.15s ease;
+
+  &.checked {
+    background-color: #0d8a56;
+    border-color: #0d8a56;
+  }
+
+  .check-icon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 15px;
+  }
+}
+
+/* Floating table horizontal scroll buttons */
+.mine {
+  position: fixed;
+  bottom: 80px;
+  z-index: 9999;
+}

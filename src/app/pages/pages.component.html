@@ -1,0 +1,50 @@
+<mat-sidenav-container [dir]="settings.rtl ? 'rtl' : 'ltr'">
+    <mat-sidenav-content #mainSidenavContent id="main" (scroll)="onPageScroll($event)">
+
+        <mat-toolbar color="primary" class="px-2">
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <a class="logo" routerLink="/">
+                        <!-- <img src="img/logo/rpm.png" alt="OptionMatrix" class="app-logo"> -->
+                         <p class="header-text">SQA</p>
+                    </a>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="end center" class="navbar-actions">
+
+                   
+                    <button mat-icon-button class="navbar-settings-button" routerLink="/settings" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <button mat-icon-button class="navbar-ai-button" (click)="toggleAi()" matTooltip="PRAGATI AI Assistant" aria-label="Toggle AI Agent">
+                        <mat-icon>auto_awesome</mat-icon>
+                    </button>
+                    <app-messages></app-messages>
+                    <app-fullscreen></app-fullscreen>
+                    <app-user-menu></app-user-menu>
+                </div>
+            </div>
+        </mat-toolbar>
+
+        <mat-toolbar id="horizontal-menu" color="primary" class="horizontal-menu px-0 transition-2" style="padding: 0 !important;">
+            <div fxLayout="row" fxLayoutAlign="center center" class="w-100 h-100">
+                <app-horizontal-menu [menuParentId]="0" class="w-100 h-100"></app-horizontal-menu>
+            </div>
+        </mat-toolbar>
+
+<div id="main-content" class="sidenav-content-inner transition-2" [class.full-bleed]="isFullBleed()">
+
+    @if (!isFullBleed()) {
+        <app-breadcrumb></app-breadcrumb>
+    }
+
+    <router-outlet></router-outlet>
+</div>
+
+        <div #backToTop fxLayout="row" fxLayoutAlign="center center" class="back-to-top" (click)="scrollToTop()">
+            <mat-icon>arrow_upward</mat-icon>
+        </div>
+
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>

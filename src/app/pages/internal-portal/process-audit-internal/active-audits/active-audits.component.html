@@ -1,0 +1,161 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="app-table-container">
+
+        <!-- Page Actions -->
+        <div class="app-page-actions" style="justify-content: flex-end;">
+          <button type="button" class="app-btn app-btn-primary" (click)="onAddAudit()">
+            <mat-icon>add</mat-icon>
+            <span>Add Audit</span>
+          </button>
+        </div>
+
+        <!-- Table Responsive Wrapper -->
+        <div #scrollContainer class="table-responsive" style="overflow-x: auto; scroll-behavior: smooth;">
+          <table class="table app-table">
+            <thead>
+              <tr>
+                <th class="text-left" style="white-space: nowrap;">Audit Reference</th>
+                <th class="text-left" style="white-space: nowrap;">Commodity</th>
+                <th class="text-left" style="white-space: nowrap;">Location</th>
+                <th class="text-left" style="white-space: nowrap;">Supplier</th>
+                <th class="text-left" style="white-space: nowrap;">Auditor</th>
+                <th class="text-center" style="white-space: nowrap;">Audit Date</th>
+                <th class="text-center" style="white-space: nowrap;">CAPA</th>
+                <th class="text-center" style="white-space: nowrap;">Report</th>
+                <th class="text-center" style="white-space: nowrap; min-width: 140px;">Status</th>
+                <th class="text-center" style="white-space: nowrap; width: 60px;">Done</th>
+                <th class="text-center" style="white-space: nowrap; width: 90px;">Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of pagedData; track item.auditReference) {
+                <tr>
+                  <!-- Audit Reference -->
+                  <td class="text-left" style="white-space: nowrap;">
+                    <a class="audit-link" [routerLink]="['/process/active-audits', item.auditReference]">
+                      {{ item.auditReference }}
+                    </a>
+                  </td>
+
+                  <!-- Commodity -->
+                  <td class="text-left" style="white-space: nowrap;">{{ item.commodity }}</td>
+
+                  <!-- Location -->
+                  <td class="text-left" style="white-space: nowrap;">{{ item.location }}</td>
+
+                  <!-- Supplier -->
+                  <td class="text-left" style="white-space: nowrap;">{{ item.supplier }}</td>
+
+                  <!-- Auditor -->
+                  <td class="text-left" style="white-space: nowrap;">{{ item.auditor }}</td>
+
+                  <!-- Audit Date -->
+                  <td class="text-center" style="white-space: nowrap;">{{ item.auditDate }}</td>
+
+                  <!-- CAPA -->
+                  <td class="text-center" style="white-space: nowrap;">
+                    <a class="capa-link" href="javascript:void(0);">{{ item.capa }}</a>
+                  </td>
+
+                  <!-- Report -->
+                  <td class="text-center" style="white-space: nowrap;">
+                    <span class="report-link">{{ item.report }}</span>
+                  </td>
+
+                  <!-- Status -->
+                  <td class="text-center" style="white-space: nowrap;">
+                    <div class="status-select-wrap">
+                      <select [(ngModel)]="item.status" class="status-select">
+                        @for (opt of statusOptions; track opt) {
+                          <option [value]="opt">{{ opt }}</option>
+                        }
+                      </select>
+                      <mat-icon class="select-chevron">keyboard_arrow_down</mat-icon>
+                    </div>
+                  </td>
+
+                  <!-- Done -->
+                  <td class="text-center" style="white-space: nowrap;">
+                    <button
+                      type="button"
+                      class="done-check-btn"
+                      [class.checked]="item.done"
+                      (click)="toggleDone(item)"
+                      aria-label="Toggle Done"
+                    >
+                      @if (item.done) {
+                        <mat-icon class="check-icon">check</mat-icon>
+                      }
+                    </button>
+                  </td>
+
+                  <!-- Manage -->
+                  <td class="text-center" style="white-space: nowrap;">
+                    <div class="table-actions" style="justify-content: center; gap: 8px;">
+                      <button
+                        type="button"
+                        class="table-action-button edit"
+                        matTooltip="Edit Audit"
+                        (click)="onEditAudit(item)"
+                      >
+                        <mat-icon style="color: #2563eb; font-size: 18px; width: 18px; height: 18px;">edit_note</mat-icon>
+                      </button>
+                      <button
+                        type="button"
+                        class="table-action-button delete"
+                        matTooltip="Delete Audit"
+                        (click)="onDeleteAudit(item)"
+                      >
+                        <mat-icon style="color: #dc2626; font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="11" class="empty-table text-center p-3">
+                    No records found
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="totalSize"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 25, 50, 100]"
+          [showFirstLastButtons]="true"
+          (page)="onPageChange($event)"
+        >
+        </mat-paginator>
+
+        <!-- Fixed Scroll Buttons -->
+        <button
+          class="mine"
+          mat-fab
+          style="background-color: #cecdcd; position: fixed; bottom: 80px; right: 110px; z-index: 9999;"
+          (click)="scrollLeft()"
+          aria-label="Scroll left"
+        >
+          <mat-icon style="color: #414141;">fast_rewind</mat-icon>
+        </button>
+        <button
+          class="mine"
+          mat-fab
+          style="background-color: #cecdcd; position: fixed; bottom: 80px; right: 40px; z-index: 9999;"
+          (click)="scrollRight()"
+          aria-label="Scroll right"
+        >
+          <mat-icon style="color: #414141;">fast_forward</mat-icon>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
